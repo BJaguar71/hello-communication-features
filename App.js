@@ -32,6 +32,9 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
+      <Button title="Choose an image from library" onPress={this.pickImage} />
+      <Button title="Take a photo" onPress={this.takePhoto} />
+      <StatusBar style="auto" />
     </View>
   );
 }
