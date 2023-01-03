@@ -23,6 +23,13 @@ export default function App() {
 
       //check if the user cancelled the proccess or not
       if (!result.canceled) {
+        // updates the initial state only if user choose a pic from camera roll
+        this.setState({
+          image: result,
+        });
+      }
+    }
+  };
   return (
     <View style={styles.container}>
     </View>
