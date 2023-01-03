@@ -21,6 +21,8 @@ export default function App() {
         mediaTypes: "Images",
       }).catch((error) => console.log(error));
 
+      //check if the user cancelled the proccess or not
+      if (!result.canceled) {
   return (
     <View style={styles.container}>
     </View>
