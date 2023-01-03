@@ -12,6 +12,15 @@ export default function App() {
   state = {
     image: null,
   };
+  // define a function to pick image from library / first check the permission
+  pickImage = async () => {
+    const { status } = await MediaLibrary.requestPermissionsAsync(Permissions.MEDIA_LIBRARY);
+    // check access from the user
+    if (status === "granted") {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: "Images",
+      }).catch((error) => console.log(error));
+
   return (
     <View style={styles.container}>
     </View>
