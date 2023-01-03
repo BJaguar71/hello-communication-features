@@ -35,6 +35,13 @@ export default function App() {
       <Button title="Choose an image from library" onPress={this.pickImage} />
       <Button title="Take a photo" onPress={this.takePhoto} />
       <StatusBar style="auto" />
+      {/* render image element if the user chose one */}
+      {this.state.image && (
+        <Image
+          source={{ uri: this.state.image.uri }}
+          style={{ width: 200, height: 200 }}
+        />
+      )}
     </View>
   );
 }
