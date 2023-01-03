@@ -8,6 +8,10 @@ import * as ImagePicker from "expo-image-picker";
 import * as MediaLibrary from 'expo-media-library';
 
 export default function App() {
+  // initial state
+  state = {
+    image: null,
+  };
   return (
     <View style={styles.container}>
     </View>
