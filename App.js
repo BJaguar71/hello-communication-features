@@ -105,15 +105,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Button title="Choose an image from library" onPress={this.pickImage} />
-      <Button title="Take a photo" onPress={this.takePhoto} />
-      <StatusBar style="auto" />
+      <Button title="Choose an image from library" onPress={pickImage} />
+      <Button title="Take a photo" onPress={takePhoto} />
+      <Button title="Play Sound" onPress={playSound} />
+      <Button
+        title={recording ? "Stop Recording" : "Start Recording"}
+        onPress={recording ? stopRecording : startRecording}
+      />
       {/* render image element if the user chose one */}
-      {this.state.image && (
-        <Image
-          source={{ uri: this.state.image.uri }}
-          style={{ width: 200, height: 200 }}
-        />
+      {image && (
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
     </View>
   );
