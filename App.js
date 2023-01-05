@@ -91,6 +91,18 @@ export default function App() {
     }
   };
 
+  // stop recording
+  const stopRecording = async () => {
+    console.log("Stopping recording..");
+    setRecording(undefined);
+    await recording.stopAndUnloadAsync();
+    await Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+    });
+    const uri = recording.getURI();
+    console.log("Recording stopped and stored at", uri);
+  };
+
   return (
     <View style={styles.container}>
       <Button title="Choose an image from library" onPress={this.pickImage} />
