@@ -51,6 +51,25 @@ export default function App() {
       console.log(error);
     }
   };
+
+  // play voice messages
+  const playSound = async () => {
+    console.log("Loading sound");
+    const { sound } = await Audio.Sound.createAsync(require(""));
+    setSound(sound);
+
+    console.log("Playing sound");
+    await sound.playAsync();
+  };
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log("Unloading sound");
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
+
   return (
     <View style={styles.container}>
       <Button title="Choose an image from library" onPress={this.pickImage} />
