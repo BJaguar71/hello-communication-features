@@ -9,9 +9,10 @@ import { Audio } from "expo-av";
 
 export default function App() {
   // initial state
-  state = {
-    image: null,
-  };
+  const [image, setImage] = useState(null);
+  const [sound, setSound] = useState();
+  const [recording, setRecording] = useState();
+
   // define a function to pick image from library / first check the permission
   pickImage = async () => {
     const { status } = await MediaLibrary.requestPermissionsAsync(Permissions.MEDIA_LIBRARY);
