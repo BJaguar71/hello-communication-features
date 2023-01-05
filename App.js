@@ -70,6 +70,27 @@ export default function App() {
       : undefined;
   }, [sound]);
 
+  // record voice message
+  const startRecording = async () => {
+    try {
+      console.log("Recording permissions...");
+      await Audio.requestPermissionsAsync();
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true,
+      });
+
+      console.log("Starting recording");
+      const { recording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets
+      );
+      setRecording(recording);
+      console.log("Recording started");
+    } catch (error) {
+      console.log("Failed to start recording", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Button title="Choose an image from library" onPress={this.pickImage} />
