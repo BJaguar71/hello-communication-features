@@ -14,20 +14,25 @@ export default function App() {
   const [recording, setRecording] = useState();
 
   // define a function to pick image from library / first check the permission
-  pickImage = async () => {
-    const { status } = await MediaLibrary.requestPermissionsAsync(Permissions.MEDIA_LIBRARY);
-    // check access from the user
-    if (status === "granted") {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: "Images",
-      }).catch((error) => console.log(error));
+  // pick an image from camera roll
+  const pickImage = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-      //check if the user cancelled the proccess or not
-      if (!result.canceled) {
-        // updates the initial state only if user choose a pic from camera roll
-        this.setState({
-          image: result,
-        });
+    // logic here inside the try obj - check access from the user
+    try {
+      if (status === "granted") {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        }).catch((error) => console.log(error));
+        if (!result.canceled) {
+          setImage(result.assets[0].uri);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
       }
     }
   };
