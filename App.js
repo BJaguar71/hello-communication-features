@@ -33,7 +33,22 @@ export default function App() {
     }
   };
 
+  // take photo from camera
+  const takePhoto = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+
+    // logic here inside try obj - check user access for camera
+    try {
+      if (status === "granted") {
+        let result = await ImagePicker.launchCameraAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        }).catch((error) => console.log(error));
+        if (!result.canceled) {
+          setImage(result.assets[0].uri);
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
