@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Button, Image } from "react-native";
 
 // import expo permission and expo image picker
@@ -55,20 +55,12 @@ export default function App() {
   // play voice messages
   const playSound = async () => {
     console.log("Loading sound");
-    const { sound } = await Audio.Sound.createAsync(require(""));
+    const { sound } = await Audio.Sound.createAsync(require("./assets/Hello.mp3"));
     setSound(sound);
 
     console.log("Playing sound");
     await sound.playAsync();
   };
-  useEffect(() => {
-    return sound
-      ? () => {
-          console.log("Unloading sound");
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
 
   // record voice message
   const startRecording = async () => {
@@ -82,7 +74,7 @@ export default function App() {
 
       console.log("Starting recording");
       const { recording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets
+        Audio.RecordingOptionsPresets.HIGH_QUALITY
       );
       setRecording(recording);
       console.log("Recording started");
